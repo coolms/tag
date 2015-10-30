@@ -38,48 +38,60 @@ trait TaggableTrait
      */
     public function __construct()
     {
-        $this->tags = new ArrayObject($this->tags);
+        
     }
 
     /**
      * @param TagInterface[] $tags
+     * @return self
      */
     public function setTags($tags)
     {
         $this->clearTags();
         $this->addTags($tags);
+
+        return $this;
     }
 
     /**
      * @param TagInterface[] $tags
+     * @return self
      */
     public function addTags($tags)
     {
         foreach ($tags as $tag) {
             $this->addTag($tag);
         }
+
+        return $this;
     }
 
     /**
      * @param TagInterface $tag
+     * @return self
      */
     public function addTag(TagInterface $tag)
     {
         $this->tags[] = $tag;
+        return $this;
     }
 
     /**
      * @param TagInterface[] $tags
+     * @return self
      */
     public function removeTags($tags)
     {
         foreach ($tags as $tag) {
             $this->removeTag($tag);
         }
+
+        return $this;
     }
 
     /**
      * @param TagInterface $tag
+     * @return self
      */
     public function removeTag(TagInterface $tag)
     {
@@ -88,6 +100,8 @@ trait TaggableTrait
                 unset($this->tags[$key]);
             }
         }
+
+        return $this;
     }
 
     /**
@@ -101,14 +115,19 @@ trait TaggableTrait
                 return true;
             }
         }
+
+        return false;
     }
 
     /**
      * Removes all tags
+     *
+     * @return self
      */
     public function clearTags()
     {
         $this->removeTags($this->tags);
+        return $this;
     }
 
     /**
